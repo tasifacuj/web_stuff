@@ -10,29 +10,16 @@
   <acticle class="card todos">
     <header class="card-header">
       <h1 class="text-center">todos</h1>
+      <form class="todo-form">
+        <div class="form-group">
+          <input type="text" class="form-control todo-input" placeholder="What else todo?">
+        </div>      
+      </form>
     </header>
-    <section class="card-body">
-      <div class="todo-item border-bottom border-light">
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="customCheck1">
-          <label class="custom-control-label" for="customCheck1">Create todo</label>
-        </div>
-      </div>
-      <div class="todo-item border-bottom border-light">
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="customCheck2">
-          <label class="custom-control-label" for="customCheck2">Close this todo item</label>
-        </div>
-      </div>
-      <div class="todo-item border-bottom border-light">
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="customCheck3">
-          <label class="custom-control-label" for="customCheck3">Close todo app</label>
-        </div>
-      </div>
+    <section class="card-body todos-container">
     </section>
     <footer class="card-footer d-flex justify-content-between align-items-center">
-      <span class="text-primary">Total todos: 3</span>
+      <p class="text-primary">Total todos: <span class="total-items">0</span></p>
       <button class="btn btn-secondary remove-all-button" type="button">Remove All</button>
     </footer>
   </acticle>

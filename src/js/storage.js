@@ -9,12 +9,16 @@ class StorageManager {
     return parseInt(localStorage.getItem('todos-count'), 10) || 0;
   }
 
+  set total(value = 0) {
+    localStorage.setItem('todos-count', value);
+  }
+
   get todos() {
     const items = [];
-    const todosResponse = JSON.parse(localStorage.getItem('todos')) || [];
+    const todos = JSON.parse(localStorage.getItem('todos')) || [];
     
-    for (let i = 0, l = todosResponse.length; i < l; i++) {
-      items.push(new Todo(todosResponse[i]));
+    for (let i = 0, l = todos.length; i < l; i++) {
+      items.push(new Todo(todos[i]));
     }
 
     return items;
@@ -26,11 +30,17 @@ class StorageManager {
   }
 
   setTodo(value) {
-    const todosResponse = JSON.parse(localStorage.getItem('todos')) || [];
+    const todos = JSON.parse(localStorage.getItem('todos')) || [];
 
-    todosResponse.push(value);
+    const todoIndex = todos.findIndex((item) => item.id === value.id);
+    if (todoIndex === -1) {
+      todos.push(value);
+      this.increaseTotal();
+    } else {
+      todos[todoIndex] = value;
+    }
 
-    localStorage.setItem(`todos`, JSON.stringify(todosResponse));
+    localStorage.setItem(`todos`, JSON.stringify(todos));
   }
 
   increaseTotal(value = 1) {
