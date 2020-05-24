@@ -4,9 +4,8 @@ class UIManager {
 
     div.classList.add('todo-item');
     div.innerHTML = `
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" data-todo-id="${todo.id}" class="custom-control-input" id="customCheck${todo.id}" ${ todo.completed ? 'checked' : '' }>
-        <label class="custom-control-label" for="customCheck${todo.id}">${todo.text}</label>
+      <div custom-control">
+        <a href="${todo.url}"  for="customCheck${todo.id}">${todo.text}</label>
       </div>
     `;
 
