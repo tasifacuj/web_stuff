@@ -1,5 +1,5 @@
 class UIManager {
-  renderTodo(todo) {
+  renderTodoUrl(todo) {
     const div = document.createElement('div');
 
     div.classList.add('todo-item');
@@ -12,14 +12,14 @@ class UIManager {
     return div;
   }
 
-  renderTodos(todos) {
-    const todosContainer = document.querySelector('.todos-container');
+  renderTodoUrls(todos) {
+    const todosContainer = document.querySelector('.urltodos-container');
     const fragment = document.createDocumentFragment();
 
     todosContainer.innerHTML = '';
 
     todos.forEach((todo) => {
-      fragment.appendChild(this.renderTodo(todo));
+      fragment.appendChild(this.renderTodoUrl(todo));
     });
 
     todosContainer.appendChild(fragment);
@@ -27,7 +27,7 @@ class UIManager {
   }
 
   onCheckChange(onCheck) {
-    const todosContainer = document.querySelector('.todos-container');
+    const todosContainer = document.querySelector('.urltodos-container');
 
     todosContainer.addEventListener('click', (event) => {
       console.log(event);

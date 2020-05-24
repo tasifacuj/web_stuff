@@ -1,4 +1,4 @@
-export class Todo {
+export class TodoUrl {
   constructor(data) {
     this.id = data.id;
     this.text = data.text;

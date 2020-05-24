@@ -8,7 +8,7 @@ class AppManager {
     //this.attackCheckListener();
     this.attachForm();
 
-    this.renderTodos();
+    this.renderTodoUrls();
     this.id_ = 0;
   }
 
@@ -18,7 +18,7 @@ class AppManager {
       removeButtom.addEventListener('click', () => {
         storageManager.clear();
         storageManager.total = 0;
-        this.renderTodos();
+        this.renderTodoUrls();
         alert('OK, I removed it all');  
       }, false);
     }
@@ -26,7 +26,7 @@ class AppManager {
 
   attachStorageListener() {
     window.addEventListener('storage', () => {
-      this.renderTodos();
+      this.renderTodoUrls();
     });
   }
 
@@ -55,7 +55,7 @@ class AppManager {
       
 
       
-    var url = 'https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=' + input.value + '&limit=5&namespace=0&format=json';
+    var url = 'https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=' + input.value + '&limit=10&namespace=0&format=json';
 
 
 
@@ -81,22 +81,22 @@ class AppManager {
         });
         }
 
-        uiManager.renderTodos(storageManager.todos);
+        uiManager.renderTodoUrls(storageManager.todos);
         input.value = '';
       })
     .catch(function(error){
       console.log('Err: ' + error);
     });
 
-      this.renderTodos();
+      this.renderTodoUrls();
       input.value = '';
       event.preventDefault();
       return false;
     });
   }
 
-  renderTodos() {
-    uiManager.renderTodos(storageManager.todos);
+  renderTodoUrls() {
+    uiManager.renderTodoUrls(storageManager.todos);
   }
 }
 

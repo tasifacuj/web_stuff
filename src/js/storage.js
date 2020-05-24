@@ -1,4 +1,4 @@
-import { Todo } from "./todo.model";
+import { TodoUrl } from "./todo.model";
 
 class StorageManager {
   constructor() {
@@ -18,7 +18,7 @@ class StorageManager {
     const todos = JSON.parse(localStorage.getItem('todos')) || [];
     
     for (let i = 0, l = todos.length; i < l; i++) {
-      items.push(new Todo(todos[i]));
+      items.push(new TodoUrl(todos[i]));
     }
 
     return items;
