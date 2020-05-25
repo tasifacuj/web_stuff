@@ -1,35 +1,35 @@
 class UIManager {
-  renderTodoUrl(todo) {
+  renderTodoUrl(url) {
     const div = document.createElement('div');
 
-    div.classList.add('todo-item');
+    div.classList.add('url-item');
     div.innerHTML = `
       <div custom-control">
-        <a href="${todo.url}"  for="customCheck${todo.id}">${todo.text}</label>
+        <a href="${url.url}"  for="customCheck${url.id}">${url.text}</label>
       </div>
     `;
 
     return div;
   }
 
-  renderTodoUrls(todos) {
-    const todosContainer = document.querySelector('.urltodos-container');
+  renderUrls(urls) {
+    const container = document.querySelector('.urltodos-container');
     const fragment = document.createDocumentFragment();
 
-    todosContainer.innerHTML = '';
+    container.innerHTML = '';
 
-    todos.forEach((todo) => {
-      fragment.appendChild(this.renderTodoUrl(todo));
+    urls.forEach((url) => {
+      fragment.appendChild(this.renderTodoUrl(url));
     });
 
-    todosContainer.appendChild(fragment);
-    this.renderTotal(todos.length);
+    container.appendChild(fragment);
+    this.renderTotal(urls.length);
   }
 
   onCheckChange(onCheck) {
-    const todosContainer = document.querySelector('.urltodos-container');
+    const container = document.querySelector('.urltodos-container');
 
-    todosContainer.addEventListener('click', (event) => {
+    container.addEventListener('click', (event) => {
       console.log(event);
       const target = event.target;
       

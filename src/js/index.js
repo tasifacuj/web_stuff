@@ -8,7 +8,7 @@ class AppManager {
     //this.attackCheckListener();
     this.attachForm();
 
-    this.renderTodoUrls();
+    this.renderUrls();
     this.id_ = 0;
   }
 
@@ -18,7 +18,7 @@ class AppManager {
       removeButtom.addEventListener('click', () => {
         storageManager.clear();
         storageManager.total = 0;
-        this.renderTodoUrls();
+        this.renderUrls();
         alert('OK, I removed it all');  
       }, false);
     }
@@ -26,38 +26,18 @@ class AppManager {
 
   attachStorageListener() {
     window.addEventListener('storage', () => {
-      this.renderTodoUrls();
+      this.renderUrls();
     });
   }
 
-  attackCheckListener() {
-    uiManager.onCheckChange((id) => {
-      const todos = storageManager.todos;
-      const todo = todos.find((item) => item.id === id);
-
-      todo.completed = true;
-      storageManager.setTodo(todo);
-    });
-  }
 
   attachForm() {
     const form = document.querySelector('.todo-form');
 
     form.addEventListener('submit', (event) => {
       const input = form.querySelector('.todo-input');
-      storageManager.clear();
-      // storageManager.setTodo({
-      //   id: Date.now(),
-      //   text: input.value,
-      //   completed: false,
-      // });
-
-      
-
-      
+      storageManager.clear();    
     var url = 'https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=' + input.value + '&limit=10&namespace=0&format=json';
-
-
 
     fetch( url )
     .then(
@@ -73,7 +53,7 @@ class AppManager {
           var number = Math.random() // 0.9394456857981651
           number.toString(36); // '0.xtis06h6'
           var id = number.toString(36).substr(2, 9);
-          storageManager.setTodo({
+          storageManager.setUrl({
             id,
             text: json[1][i],
             completed: false,
@@ -81,22 +61,22 @@ class AppManager {
         });
         }
 
-        uiManager.renderTodoUrls(storageManager.todos);
+        uiManager.renderUrls(storageManager.urls);
         input.value = '';
       })
     .catch(function(error){
       console.log('Err: ' + error);
     });
 
-      this.renderTodoUrls();
+      this.renderUrls();
       input.value = '';
       event.preventDefault();
       return false;
     });
   }
 
-  renderTodoUrls() {
-    uiManager.renderTodoUrls(storageManager.todos);
+  renderUrls() {
+    uiManager.renderUrls(storageManager.urls);
   }
 }
 

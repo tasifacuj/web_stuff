@@ -1,76 +1,53 @@
-import { TodoUrl } from "./todo.model";
+import { UrlModel } from "./url.model";
 
 class StorageManager {
   constructor() {
-    this.initTodos();
+    this.initialize();
   }
 
   get total() {
-    return parseInt(localStorage.getItem('todos-count'), 10) || 0;
+    return parseInt(localStorage.getItem('urls-count'), 10) || 0;
   }
 
   set total(value = 0) {
-    localStorage.setItem('todos-count', value);
+    localStorage.setItem('urls-count', value);
   }
 
-  get todos() {
+  get urls() {
     const items = [];
-    const todos = JSON.parse(localStorage.getItem('todos')) || [];
+    const urls = JSON.parse(localStorage.getItem('urls')) || [];
     
-    for (let i = 0, l = todos.length; i < l; i++) {
-      items.push(new TodoUrl(todos[i]));
+    for (let i = 0, l = urls.length; i < l; i++) {
+      items.push(new UrlModel(urls[i]));
     }
 
     return items;
   }
 
   clear() {
-    localStorage.removeItem('todos');
-    localStorage.removeItem('todos-count');
+    localStorage.removeItem('urls');
+    localStorage.removeItem('urls-count');
   }
 
-  setTodo(value) {
-    const todos = JSON.parse(localStorage.getItem('todos')) || [];
+  setUrl(value) {
+    const urls = JSON.parse(localStorage.getItem('urls')) || [];
 
-    const todoIndex = todos.findIndex((item) => item.id === value.id);
-    if (todoIndex === -1) {
-      todos.push(value);
+    const urlIndex = urls.findIndex((item) => item.id === value.id);
+    if (urlIndex === -1) {
+      urls.push(value);
       this.increaseTotal();
     } else {
-      todos[todoIndex] = value;
+      urls[urlIndex] = value;
     }
 
-    localStorage.setItem(`todos`, JSON.stringify(todos));
+    localStorage.setItem(`urls`, JSON.stringify(urls));
   }
 
   increaseTotal(value = 1) {
-    localStorage.setItem('todos-count', this.total + value);
+    localStorage.setItem('urls-count', this.total + value);
   }
 
-  initTodos() {
-    if (this.total) {
-      return;
-    }
-    const items = [{
-      id: 0,
-      text: 'Create todo',
-      completed: false,
-    }, {
-      id: 1,
-      text: 'Close this todo items',
-      completed: false,
-    }, {
-      id: 2,
-      text: 'Close todo app',
-      completed: false,
-    }];
-    
-    items.forEach((todo) => this.setTodo(todo));
-
-    this.increaseTotal(items.length);
-
-    alert('You dont have todos!!! We will fix it for you.');
-  }
+  initialize() { /*empty by now*/  }
 }
 
 export const storageManager = new StorageManager();
